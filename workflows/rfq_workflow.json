@@ -1,0 +1,28 @@
+{
+    "name": "rfq_workflow",
+    "description": "Workflow to handle RFQ process",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "process_rfq",
+        "taskReferenceName": "processRFQ",
+        "type": "SIMPLE",
+        "inputParameters": {
+          "rfqDetails": "${workflow.input.rfq}"
+        }
+      },
+      {
+        "name": "generate_quote",
+        "taskReferenceName": "generateQuote",
+        "type": "SIMPLE",
+        "inputParameters": {
+          "processedRFQ": "${processRFQ.output.processedData}"
+        }
+      }
+    ],
+    "outputParameters": {
+      "quote": "${generateQuote.output.quoteDetails}"
+    },
+    "schemaVersion": 2
+  }
+  

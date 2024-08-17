@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Workflow Automation</title>
+</head>
+<body>
+    <h1>Financial Workflow Automation</h1>
+
+    <h2>KYC Workflow</h2>
+    <input type="text" id="kycData" placeholder="Enter KYC Data">
+    <button onclick="sendKYC()">Start KYC Process</button>
+    <p id="kycResponse"></p>
+
+    <h2>RFQ Workflow</h2>
+    <input type="text" id="rfqData" placeholder="Enter RFQ Data">
+    <button onclick="sendRFQ()">Send RFQ</button>
+    <p id="rfqResponse"></p>
+
+    <h2>IOI Workflow</h2>
+    <input type="text" id="ioiData" placeholder="Enter IOI Data">
+    <button onclick="sendIOI()">Send IOI</button>
+    <p id="ioiResponse"></p>
+
+    <h2>Settlement Workflow</h2>
+    <input type="text" id="settlementData" placeholder="Enter Settlement Data">
+    <button onclick="sendSettlement()">Start Settlement Process</button>
+    <p id="settlementResponse"></p>
+
+    <h2>Data Distribution Workflow</h2>
+    <input type="text" id="dataDistData" placeholder="Enter Data Distribution Details">
+    <button onclick="sendDataDistribution()">Distribute Data</button>
+    <p id="dataDistResponse"></p>
+
+    <script>
+        function sendKYC() {
+            var kycData = document.getElementById('kycData').value;
+            fetch('/kyc', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({kyc: kycData})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('kycResponse').innerText = data.response;
+            });
+        }
+
+        function sendRFQ() {
+            var rfqData = document.getElementById('rfqData').value;
+            fetch('/rfq', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({rfq: rfqData})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('rfqResponse').innerText = data.response;
+            });
+        }
+
+        function sendIOI() {
+            var ioiData = document.getElementById('ioiData').value;
+            fetch('/ioi', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ioi: ioiData})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('ioiResponse').innerText = data.response;
+            });
+        }
+
+        function sendSettlement() {
+            var settlementData = document.getElementById('settlementData').value;
+            fetch('/settlement', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({settlement: settlementData})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('settlementResponse').innerText = data.response;
+            });
+        }
+
+        function sendDataDistribution() {
+            var dataDistData = document.getElementById('dataDistData').value;
+            fetch('/data-distribution', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({data_distribution: dataDistData})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('dataDistResponse').innerText = data.response;
+            });
+        }
+    </script>
+</body>
+</html>

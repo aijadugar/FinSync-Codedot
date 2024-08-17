@@ -1,0 +1,28 @@
+{
+    "name": "ioi_workflow",
+    "description": "Workflow to handle IOI process",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "validate_ioi",
+        "taskReferenceName": "validateIOI",
+        "type": "SIMPLE",
+        "inputParameters": {
+          "ioiDetails": "${workflow.input.ioi}"
+        }
+      },
+      {
+        "name": "approve_ioi",
+        "taskReferenceName": "approveIOI",
+        "type": "SIMPLE",
+        "inputParameters": {
+          "validationResult": "${validateIOI.output.result}"
+        }
+      }
+    ],
+    "outputParameters": {
+      "ioiStatus": "${approveIOI.output.status}"
+    },
+    "schemaVersion": 2
+  }
+  

@@ -1,0 +1,28 @@
+{
+    "name": "data_distribution_workflow",
+    "description": "Workflow to handle data distribution",
+    "version": 1,
+    "tasks": [
+      {
+        "name": "validate_data_request",
+        "taskReferenceName": "validateDataRequest",
+        "type": "SIMPLE",
+        "inputParameters": {
+          "requestData": "${workflow.input.data_distribution}"
+        }
+      },
+      {
+        "name": "distribute_data",
+        "taskReferenceName": "distributeData",
+        "type": "SIMPLE",
+        "inputParameters": {
+          "validatedData": "${validateDataRequest.output.validatedData}"
+        }
+      }
+    ],
+    "outputParameters": {
+      "distributionStatus": "${distributeData.output.status}"
+    },
+    "schemaVersion": 2
+  }
+  
