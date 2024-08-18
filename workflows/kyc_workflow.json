@@ -1,28 +1,27 @@
 {
-    "name": "kyc_workflow",
-    "description": "Workflow to handle KYC process",
-    "version": 1,
-    "tasks": [
-      {
-        "name": "validate_documents",
-        "taskReferenceName": "validateDocs",
-        "type": "SIMPLE",
-        "inputParameters": {
-          "documents": "${workflow.input.kyc.documents}"
-        }
-      },
-      {
-        "name": "approve_kyc",
-        "taskReferenceName": "approveKYC",
-        "type": "SIMPLE",
-        "inputParameters": {
-          "validationResult": "${validateDocs.output.result}"
-        }
+  "name": "kyc_workflow",
+  "description": "Simple KYC workflow",
+  "version": 1,
+  "tasks": [
+    {
+      "name": "validate_documents",
+      "taskReferenceName": "validateDocs",
+      "type": "SIMPLE",
+      "inputParameters": {
+        "documents": "${workflow.input.kyc.documents}"
       }
-    ],
-    "outputParameters": {
-      "kycStatus": "${approveKYC.output.status}"
     },
-    "schemaVersion": 2
-  }
-  
+    {
+      "name": "approve_kyc",
+      "taskReferenceName": "approveKYC",
+      "type": "SIMPLE",
+      "inputParameters": {
+        "validationResult": "${validateDocs.output.result}"
+      }
+    }
+  ],
+  "outputParameters": {
+    "kycStatus": "${approveKYC.output.status}"
+  },
+  "schemaVersion": 2
+}
