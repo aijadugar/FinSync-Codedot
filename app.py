@@ -1,11 +1,15 @@
 from flask import Flask, render_template, request, jsonify
 import requests
+import os
 
 app = Flask(__name__)
 
 # Function to trigger the Conductor workflow
 def trigger_workflow(workflow_name, data):
-    url = 'http://127.0.0.1:5000'  # Update this URL to your Conductor instance
+    url = os.getenv('CONDUCTOR_URL')  # Get the URL from environment variable
+    if url is None:
+        raise ValueError("CONDUCTOR_URL environment variable not set")
+    
     payload = {
         "name": workflow_name,
         "input": data
